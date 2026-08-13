@@ -1,0 +1,13 @@
+<h1><%= @post.title %></h1>
+
+<p>投稿者：<%= @post.user.name %></p>
+<p>評価：<%= @post.rating %> / 5</p>
+<p><%= @post.body %></p>
+
+<% if @post.user == current_user %>
+  <%= link_to "編集", edit_post_path(@post) %>
+
+   <%= link_to "削除",post_path(@post),data: {turbo_method: :delete,turbo_confirm: "本当にこの投稿を削除しますか？"} %>
+<% end %>
+
+<%= link_to "投稿一覧へ戻る", posts_path %>
