@@ -1,0 +1,24 @@
+<h1>マイページ</h1>
+
+<h2>ユーザー情報</h2>
+
+<p>名前：<%= @user.name %></p>
+<p>メールアドレス：<%= @user.email %></p>
+
+<%= link_to "ユーザー情報を編集", edit_user_registration_path %>
+
+<h2>自分の投稿一覧</h2>
+
+<% if @posts.any? %>
+  <% @posts.each do |post| %>
+    <div>
+      <h3><%= post.title %></h3>
+      <p>評価：<%= post.rating %> / 5</p>
+      <%= link_to "詳細を見る", post_path(post) %>
+    </div>
+  <% end %>
+<% else %>
+  <p>まだ投稿がありません。</p>
+<% end %>
+
+<%= link_to "退会する",user_registration_path,data: {turbo_method: :delete,turbo_confirm: "本当に退会しますか？"} %>
