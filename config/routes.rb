@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {registrations: "users/registrations"}
   root to: "homes#top"
   get "/about", to: "homes#about"
-  resources :posts
+  resources :posts do
+    resources :comments
+    resource :bookmark
+  end
   get "/mypage" , to: "users#mypage" , as: :mypage
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -1,15 +1,22 @@
 <div class="top-container">
+  <%= image_tag "movie_compass_top.jpg",alt: "Movie Compass メインビジュアル",class: "top-image" %>
+
   <h1>Movie Compass</h1>
 
-   <p>
-      あなたにぴったりの映画を見つけよう
-   </p>
+  <p>
+    あなたにぴったりの映画を見つけよう
+  </p>
 
-   <p>
+  <p>
     映画のレビューや評価を共有して、
     次に観たい映画を見つけるためのレビューサイトです。
-   </p>
+  </p>
 
   <%= link_to "Movie Compassについて", about_path %>
-</div>
 
+  <% unless user_signed_in? %>
+    <%= link_to "新規登録", new_user_registration_path %>
+    <%= link_to "ログイン", new_user_session_path %>
+  <% end %>
+
+</div>

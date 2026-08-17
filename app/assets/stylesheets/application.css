@@ -1,10 +1,151 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+body{
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+  color: #222;
+}
+
+/* header */
+
+header {
+  background-color: #111827;
+  padding: 16px 24px;
+}
+
+header nav {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+header a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+header a:hover {
+  opacity: 0.7;
+}
+
+header form {
+  margin: 0;
+}
+
+/* TOP*/
+.top-container{
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.top-image{
+  width: 100%;
+  max-height: 550px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.top-container h1 {
+  font-size: 42px;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.top-container p {
+  font-size: 18px;
+  line-height: 1.8;
+}
+.top-links {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.top-button {
+  display: inline-block;
+  padding: 10px 22px;
+  background-color: #111827;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.top-button:hover {
+  opacity: 0.8;
+}
+
+/* About*/
+.about-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px 50px;
+}
+
+.about-image {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin: 20px 0 35px;
+}
+
+.about-container h1 {
+  text-align: center;
+  font-size: 38px;
+}
+
+.about-container h2 {
+  margin-top: 35px;
+}
+
+.about-container p,
+.about-container li {
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+@media screen and (max-width: 768px) {
+  header {
+    padding: 12px 15px;
+  }
+
+  header nav {
+    gap: 12px;
+  }
+
+  header a,
+  header button {
+    font-size: 14px;
+  }
+
+  .top-container,
+  .about-container {
+    margin: 20px auto;
+    padding: 0 15px;
+  }
+
+  .top-container h1,
+  .about-container h1 {
+    font-size: 28px;
+  }
+
+  .top-container p,
+  .about-container p,
+  .about-container li {
+    font-size: 15px;
+  }
+
+  .top-image,
+  .about-image {
+    max-height: 300px;
+  }
+}
