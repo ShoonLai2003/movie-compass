@@ -17,7 +17,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_13_090616) do
     t.integer "rating", null: false
     t.string "title", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
