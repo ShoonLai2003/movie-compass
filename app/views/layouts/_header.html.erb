@@ -14,4 +14,14 @@
       <%= link_to "ログイン", new_user_session_path %>
     <% end %>
   </nav>
+
+  <% if user_signed_in? %>
+  <div class="search-form">
+    <%= form_with url: search_path, method: :get, local: true do |f| %>
+      <%= f.select :range, options_for_select([["ユーザー", "User"], ["投稿", "Post"]]) %>
+      <%= f.text_field :word, placeholder: "キーワードを入力" %>
+      <%= f.submit "検索" %>
+    <% end %>
+  </div>
+<% end %>
 </header>

@@ -1,0 +1,27 @@
+<h2>検索結果</h2>
+
+<% if @word.blank? %>
+  <p>キーワードを入力してください。</p>
+
+<% elsif @range == "User" %>
+  <h3>ユーザー検索結果</h3>
+
+  <% if @users.any? %>
+    <% @users.each do |user| %>
+      <p><%= link_to user.name, user_path(user) %></p>
+    <% end %>
+  <% else %>
+    <p>該当するユーザーが見つかりませんでした。</p>
+  <% end %>
+
+<% else %>
+  <h3>投稿検索結果</h3>
+
+  <% if @posts.any? %>
+    <% @posts.each do |post| %>
+      <p><%= link_to post.title, post_path(post) %></p>
+    <% end %>
+  <% else %>
+    <p>該当する投稿が見つかりませんでした。</p>
+  <% end %>
+<% end %>
