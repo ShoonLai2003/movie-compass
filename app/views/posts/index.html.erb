@@ -8,6 +8,7 @@
 
     <p>投稿者：<%= post.user.name %></p>
     <p>評価：<%= post.rating %> / 5</p>
+    <p>コメント数：<%= post.comments.count %></p>
 
     <%= link_to "詳細を見る", post_path(post) %>
   </div>

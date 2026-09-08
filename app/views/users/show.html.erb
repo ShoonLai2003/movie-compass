@@ -3,6 +3,7 @@
 <%if @posts.any? %>
   <% @posts.each do |post| %>
     <p><%= link_to post.title, post_path(post) %></p>
+    <p>コメント数：<%= post.comments.count %></p>
   <%end%>
 <%else%>
   <p>まだ投稿はありません。</p>
