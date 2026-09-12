@@ -1,0 +1,20 @@
+<h2>ユーザー詳細</h2>
+
+<p>名前：<%= @user.name %></p>
+<p>メールアドレス：<%= @user.email %></p>
+
+<p>
+  会員ステータス：
+  <% if @user.is_active %>
+    有効
+  <% else %>
+    退会済み
+  <% end %>
+</p>
+
+<% if @user.is_active %>
+  <%= link_to "退会",admin_user_path(@user),
+      data: {turbo_method: :patch,turbo_confirm: "本当に退会処理を行いますか？"} %>
+<% end %>
+
+<%= link_to "ユーザー一覧へ戻る", admin_users_path %>
