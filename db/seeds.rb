@@ -10,6 +10,12 @@
 
 puts "seedの実行を開始"
 
+if ENV["ADMIN_EMAIL"].present? && ENV["ADMIN_PASSWORD"].present?
+  Admin.find_or_create_by!(email: ENV["ADMIN_EMAIL"]) do |admin|
+    admin.password = ENV["ADMIN_PASSWORD"]
+  end
+end
+
 user1 = User.find_or_create_by!(email: "user1@example.com") do |user|
   user.name = "伊藤"
   user.status = "映画好きです"

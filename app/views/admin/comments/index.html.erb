@@ -1,0 +1,16 @@
+<h2>コメント一覧</h2>
+
+<% if @comments.any? %>
+  <% @comments.each do |comment| %>
+    <div>
+      <p>投稿：<%= comment.post.title %></p>
+      <p>コメント投稿者：<%= comment.user.name %></p>
+      <p>コメント：<%= comment.comment %></p>
+
+      <%= link_to "コメントを削除",admin_comment_path(comment),
+          data: {turbo_method: :delete,turbo_confirm: "本当にこのコメントを削除しますか？"} %>
+    </div>
+  <% end %>
+<% else %>
+  <p>コメントはありません。</p>
+<% end %>
