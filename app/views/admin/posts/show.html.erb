@@ -1,12 +1,49 @@
-<h2>投稿詳細</h2>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
 
-<p>タイトル：<%= @post.title %></p>
-<p>投稿者：<%= @post.user.name %></p>
-<p>評価：<%= @post.rating %></p>
-<p>本文：<%= @post.body %></p>
-<p>コメント数：<%= @post.comments.count %></p>
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <h2 class="mb-4">投稿詳細</h2>
 
-<%= link_to "投稿を削除",admin_post_path(@post),
-    data: {turbo_method: :delete,turbo_confirm: "本当にこの投稿を削除しますか？"} %>
+          <p>
+            <strong>タイトル：</strong>
+            <%= @post.title %>
+          </p>
 
-<%= link_to "投稿一覧へ戻る", admin_posts_path %>
+          <p>
+            <strong>投稿者：</strong>
+            <%= @post.user.name %>
+          </p>
+
+          <p>
+            <strong>評価：</strong>
+            <%= @post.rating %> / 5
+          </p>
+
+          <p>
+            <strong>本文：</strong>
+          </p>
+
+          <div class="border rounded p-3 mb-3 bg-light">
+            <%= @post.body %>
+          </div>
+
+          <p>
+            <strong>コメント数：</strong>
+            <%= @post.comments.count %>
+          </p>
+
+          <div class="d-flex flex-wrap gap-2 mt-4">
+            <%= link_to "投稿を削除",admin_post_path(@post),
+                data: {turbo_method: :delete,turbo_confirm: "本当にこの投稿を削除しますか？"},
+                class: "btn btn-outline-danger" %>
+
+            <%= link_to "投稿一覧へ戻る",admin_posts_path,class: "btn btn-outline-secondary" %>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

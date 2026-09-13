@@ -1,24 +1,62 @@
-<h1>マイページ</h1>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-9">
 
-<h2>ユーザー情報</h2>
+      <h1 class="mb-4">マイページ</h1>
 
-<p>名前：<%= @user.name %></p>
-<p>メールアドレス：<%= @user.email %></p>
+      <div class="card shadow-sm mb-4">
+        <div class="card-body p-4">
+          <h2 class="h4 mb-3">ユーザー情報</h2>
 
-<%= link_to "ユーザー情報を編集", edit_user_registration_path %>
+          <p class="mb-2">
+            <strong>名前：</strong><%= @user.name %>
+          </p>
 
-<h2>自分の投稿一覧</h2>
+          <p class="mb-3">
+            <strong>メールアドレス：</strong><%= @user.email %>
+          </p>
 
-<% if @posts.any? %>
-  <% @posts.each do |post| %>
-    <div>
-      <h3><%= post.title %></h3>
-      <p>評価：<%= post.rating %> / 5</p>
-      <%= link_to "詳細を見る", post_path(post) %>
+          <div class="d-flex flex-wrap gap-2">
+            <%= link_to "ユーザー情報を編集",edit_user_registration_path,class: "btn btn-outline-primary" %>
+
+            <%= link_to "退会する",
+                user_registration_path,
+                data: {turbo_method: :delete,turbo_confirm: "本当に退会しますか？"},
+                class: "btn btn-outline-danger" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <h2 class="h4 mb-4">自分の投稿一覧</h2>
+
+          <% if @posts.any? %>
+            <div class="row g-3">
+              <% @posts.each do |post| %>
+                <div class="col-12 col-md-6">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <h3 class="h5"><%= post.title %></h3>
+
+                      <p>
+                        評価：<%= post.rating %> / 5
+                      </p>
+
+                      <%= link_to "詳細を見る",post_path(post),class: "btn btn-outline-primary btn-sm" %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% else %>
+            <p class="text-muted mb-0">
+              まだ投稿がありません。
+            </p>
+          <% end %>
+        </div>
+      </div>
+
     </div>
-  <% end %>
-<% else %>
-  <p>まだ投稿がありません。</p>
-<% end %>
-
-<%= link_to "退会する",user_registration_path,data: {turbo_method: :delete,turbo_confirm: "本当に退会しますか？"} %>
+  </div>
+</div>

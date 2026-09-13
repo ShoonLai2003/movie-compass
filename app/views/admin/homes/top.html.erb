@@ -1,15 +1,44 @@
-<h2>管理者トップ</h2>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-9">
 
-<p>Movie Compass 管理者メニュー</p>
+      <h2 class="mb-2">管理者トップ</h2>
+      <p class="text-muted mb-4">Movie Compass 管理者メニュー</p>
 
-<div>
-  <%= link_to "ユーザー管理", admin_users_path %>
-</div>
+      <div class="row g-4">
 
-<div>
-  <%= link_to "投稿管理", admin_posts_path %>
-</div>
+        <div class="col-12 col-md-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body text-center p-4">
+              <h3 class="h5 mb-3">ユーザー管理</h3>
 
-<div>
-  <%= link_to "コメント管理", admin_comments_path %>
+              <%= link_to "ユーザー一覧へ",admin_users_path,class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body text-center p-4">
+              <h3 class="h5 mb-3">投稿管理</h3>
+
+              <%= link_to "投稿一覧へ",admin_posts_path,class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body text-center p-4">
+              <h3 class="h5 mb-3">コメント管理</h3>
+
+              <%= link_to "コメント一覧へ",admin_comments_path,class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
 </div>
