@@ -1,27 +1,61 @@
-<h2>検索結果</h2>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-9">
 
-<% if @word.blank? %>
-  <p>キーワードを入力してください。</p>
+      <h2 class="mb-4">検索結果</h2>
 
-<% elsif @range == "User" %>
-  <h3>ユーザー検索結果</h3>
+      <% if @word.blank? %>
+        <div class="alert alert-warning">
+          キーワードを入力してください。
+        </div>
 
-  <% if @users.any? %>
-    <% @users.each do |user| %>
-      <p><%= link_to user.name, user_path(user) %></p>
-    <% end %>
-  <% else %>
-    <p>該当するユーザーが見つかりませんでした。</p>
-  <% end %>
+      <% elsif @range == "User" %>
+        <h3 class="h4 mb-3">ユーザー検索結果</h3>
 
-<% else %>
-  <h3>投稿検索結果</h3>
+        <% if @users.any? %>
+          <div class="row g-3">
+            <% @users.each do |user| %>
+              <div class="col-12 col-md-6">
+                <div class="card h-100 shadow-sm">
+                  <div class="card-body">
+                    <%= link_to user.name,
+                        user_path(user),
+                        class: "text-decoration-none fw-bold" %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="alert alert-secondary">
+            該当するユーザーが見つかりませんでした。
+          </div>
+        <% end %>
 
-  <% if @posts.any? %>
-    <% @posts.each do |post| %>
-      <p><%= link_to post.title, post_path(post) %></p>
-    <% end %>
-  <% else %>
-    <p>該当する投稿が見つかりませんでした。</p>
-  <% end %>
-<% end %>
+      <% else %>
+        <h3 class="h4 mb-3">投稿検索結果</h3>
+
+        <% if @posts.any? %>
+          <div class="row g-3">
+            <% @posts.each do |post| %>
+              <div class="col-12 col-md-6">
+                <div class="card h-100 shadow-sm">
+                  <div class="card-body">
+                    <%= link_to post.title,
+                        post_path(post),
+                        class: "text-decoration-none fw-bold" %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="alert alert-secondary">
+            該当する投稿が見つかりませんでした。
+          </div>
+        <% end %>
+      <% end %>
+
+    </div>
+  </div>
+</div>

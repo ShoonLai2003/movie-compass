@@ -1,15 +1,35 @@
-<h1>投稿一覧</h1>
+<div class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="mb-0">投稿一覧</h1>
 
-<%= link_to "新規投稿" , new_post_path %>
-
-<% @posts.each do |post| %>
-  <div>
-    <h2><%= post.title %></h2>
-
-    <p>投稿者：<%= post.user.name %></p>
-    <p>評価：<%= post.rating %> / 5</p>
-    <p>コメント数：<%= post.comments.count %></p>
-
-    <%= link_to "詳細を見る", post_path(post) %>
+    <%= link_to "新規投稿",new_post_path,class: "btn btn-primary" %>
   </div>
-<% end %>
+
+  <div class="row g-4">
+    <% @posts.each do |post| %>
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h2 class="h5 card-title">
+              <%= post.title %>
+            </h2>
+
+            <p class="card-text mb-2">
+              投稿者：<%= post.user.name %>
+            </p>
+
+            <p class="card-text mb-2">
+              評価：<%= post.rating %> / 5
+            </p>
+
+            <p class="card-text mb-3">
+              コメント数：<%= post.comments.count %>
+            </p>
+
+            <%= link_to "詳細を見る",post_path(post),class: "btn btn-outline-primary" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

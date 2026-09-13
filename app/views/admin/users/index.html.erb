@@ -1,10 +1,49 @@
-<h2>ユーザー一覧</h2>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-10">
 
-<% @users.each do |user| %>
-  <div>
-    <p>
-      <%= link_to user.name, admin_user_path(user) %>
-    </p>
-    <p><%= user.email %></p>
+      <h2 class="mb-4">ユーザー一覧</h2>
+
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead>
+                <tr>
+                  <th>名前</th>
+                  <th>メールアドレス</th>
+                  <th>会員ステータス</th>
+                  <th></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% @users.each do |user| %>
+                  <tr>
+                    <td><%= user.name %></td>
+                    <td><%= user.email %></td>
+
+                    <td>
+                      <% if user.is_active %>
+                        <span class="badge text-bg-success">有効</span>
+                      <% else %>
+                        <span class="badge text-bg-secondary">退会済み</span>
+                      <% end %>
+                    </td>
+
+                    <td class="text-end">
+                      <%= link_to "詳細",admin_user_path(user),class: "btn btn-outline-primary btn-sm" %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
   </div>
-<% end %>
+</div>

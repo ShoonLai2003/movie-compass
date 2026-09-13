@@ -1,37 +1,97 @@
-<h1><%= @post.title %></h1>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-8">
 
-<p>投稿者：<%= @post.user.name %></p>
-<p>評価：<%= @post.rating %> / 5</p>
-<p><%= @post.body %></p>
+      <div class="card shadow-sm mb-4">
+        <div class="card-body p-4">
+          <h1 class="h3 mb-3"><%= @post.title %></h1>
 
-<% if @post.user == current_user %>
-  <%= link_to "編集", edit_post_path(@post) %>
+          <p class="mb-2">
+            <strong>投稿者：</strong><%= @post.user.name %>
+          </p>
 
-   <%= link_to "削除",post_path(@post),data: {turbo_method: :delete,turbo_confirm: "本当にこの投稿を削除しますか？"} %>
-<% end %>
+          <p class="mb-2">
+            <strong>評価：</strong><%= @post.rating %> / 5
+          </p>
 
-<%= link_to "投稿一覧へ戻る", posts_path %>
+          <p class="mb-4">
+            <%= @post.body %>
+          </p>
 
-<h2>コメント</h2>
+          <div class="d-flex flex-wrap gap-2">
+            <% if @post.user == current_user %>
+              <%= link_to "編集",
+                  edit_post_path(@post),
+                  class: "btn btn-outline-primary" %>
 
-<%= form_with model: [@post, @comment], local: true do |f| %>
-  <%= f.text_area :comment, placeholder: "コメントを入力してください" %>
-  <%= f.submit "コメントする" %>
-<% end %>
+              <%= link_to "削除",
+                  post_path(@post),
+                  data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "本当にこの投稿を削除しますか？"
+                  },
+                  class: "btn btn-outline-danger" %>
+            <% end %>
 
-<h3>コメント一覧</h3>
+            <%= link_to "投稿一覧へ戻る",
+                posts_path,
+                class: "btn btn-outline-secondary" %>
+          </div>
+        </div>
+      </div>
 
-<% if @comments.any? %>
-  <% @comments.each do |comment| %>
-    <div>
-      <p><%= comment.user.name %></p>
-      <p><%= comment.comment %></p>
+      <div class="card shadow-sm mb-4">
+        <div class="card-body p-4">
+          <h2 class="h4 mb-3">コメント</h2>
 
-      <% if comment.user == current_user %>
-       <%= link_to "コメント削除",post_comment_path(@post, comment),data: {turbo_method: :delete,turbo_confirm: "このコメントを削除しますか？"}%>
-      <% end %>
+          <%= form_with model: [@post, @comment], local: true do |f| %>
+            <div class="mb-3">
+              <%= f.text_area :comment,
+                  placeholder: "コメントを入力してください",
+                  class: "form-control",
+                  rows: 4 %>
+            </div>
+
+            <%= f.submit "コメントする",
+                class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <h3 class="h4 mb-4">コメント一覧</h3>
+
+          <% if @comments.any? %>
+            <% @comments.each do |comment| %>
+              <div class="border-bottom pb-3 mb-3">
+                <p class="fw-bold mb-1">
+                  <%= comment.user.name %>
+                </p>
+
+                <p class="mb-2">
+                  <%= comment.comment %>
+                </p>
+
+                <% if comment.user == current_user %>
+                  <%= link_to "コメント削除",
+                      post_comment_path(@post, comment),
+                      data: {
+                        turbo_method: :delete,
+                        turbo_confirm: "このコメントを削除しますか？"
+                      },
+                      class: "btn btn-sm btn-outline-danger" %>
+                <% end %>
+              </div>
+            <% end %>
+          <% else %>
+            <p class="text-muted mb-0">
+              まだコメントはありません。
+            </p>
+          <% end %>
+        </div>
+      </div>
+
     </div>
-  <% end %>
-<% else %>
-  <p>まだコメントはありません。</p>
-<% end %>
+  </div>
+</div>

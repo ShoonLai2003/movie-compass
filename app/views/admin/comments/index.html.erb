@@ -1,16 +1,50 @@
-<h2>コメント一覧</h2>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-10">
 
-<% if @comments.any? %>
-  <% @comments.each do |comment| %>
-    <div>
-      <p>投稿：<%= comment.post.title %></p>
-      <p>コメント投稿者：<%= comment.user.name %></p>
-      <p>コメント：<%= comment.comment %></p>
+      <h2 class="mb-4">コメント一覧</h2>
 
-      <%= link_to "コメントを削除",admin_comment_path(comment),
-          data: {turbo_method: :delete,turbo_confirm: "本当にこのコメントを削除しますか？"} %>
+      <% if @comments.any? %>
+        <div class="card shadow-sm">
+          <div class="card-body p-4">
+
+            <div class="table-responsive">
+              <table class="table table-hover align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th>投稿</th>
+                    <th>コメント投稿者</th>
+                    <th>コメント</th>
+                    <th></th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <% @comments.each do |comment| %>
+                    <tr>
+                      <td><%= comment.post.title %></td>
+                      <td><%= comment.user.name %></td>
+                      <td><%= comment.comment %></td>
+
+                      <td class="text-end">
+                        <%= link_to "削除",admin_comment_path(comment),
+                            data: {turbo_method: :delete,turbo_confirm: "本当にこのコメントを削除しますか？"},
+                            class: "btn btn-outline-danger btn-sm" %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      <% else %>
+        <div class="alert alert-secondary">
+          コメントはありません。
+        </div>
+      <% end %>
+
     </div>
-  <% end %>
-<% else %>
-  <p>コメントはありません。</p>
-<% end %>
+  </div>
+</div>
