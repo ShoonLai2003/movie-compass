@@ -13,8 +13,31 @@
                   <div class="card h-100">
                     <div class="card-body">
                       <h3 class="h5">
-                        <%= link_to post.title,post_path(post),class: "text-decoration-none" %>
+                        <%= link_to post.title,
+                            post_path(post),
+                            class: "text-decoration-none" %>
                       </h3>
+
+                      <div class="mb-2">
+                        <span>評価：</span>
+                        <div id="user-post-rating-<%= post.id %>"></div>
+                      </div>
+
+                      <script>
+                        document.addEventListener("turbo:load", function() {
+                          const elem = document.querySelector("#user-post-rating-<%= post.id %>");
+
+                          if (elem && elem.children.length === 0) {
+                            raty(elem, {
+                              score: <%= post.rating %>,
+                              readOnly: true,
+                              starOff: "<%= asset_path('star-off.png') %>",
+                              starOn: "<%= asset_path('star-on.png') %>",
+                              starHalf: "<%= asset_path('star-half.png') %>"
+                            });
+                          }
+                        });
+                      </script>
 
                       <p class="mb-0">
                         コメント数：<%= post.comments.count %>

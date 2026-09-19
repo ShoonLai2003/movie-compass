@@ -31,12 +31,25 @@
             </div>
 
             <div class="mb-4">
-              <%= f.label :rating, "評価（1〜5）", class: "form-label" %>
-              <%= f.number_field :rating,
-                  min: 1,
-                  max: 5,
-                  class: "form-control" %>
+              <label class="form-label">評価</label>
+              <div id="edit-post-rating"></div>
             </div>
+
+            <script>
+              document.addEventListener("turbo:load", function() {
+                const elem = document.querySelector("#edit-post-rating");
+
+                if (elem && elem.children.length === 0) {
+                  raty(elem, {
+                    score: <%= @post.rating %>,
+                    readOnly: true,
+                    starOff: "<%= asset_path('star-off.png') %>",
+                    starOn: "<%= asset_path('star-on.png') %>",
+                    starHalf: "<%= asset_path('star-half.png') %>"
+                  });
+                }
+              });
+            </script>
 
             <div class="d-grid">
               <%= f.submit "更新する", class: "btn btn-primary" %>

@@ -11,8 +11,25 @@
           </p>
 
           <p class="mb-2">
-            <strong>評価：</strong><%= @post.rating %> / 5
+            <strong>評価：</strong>
+            <span id="post-rating-show"></span>
           </p>
+
+          <script>
+            document.addEventListener("turbo:load", function() {
+              const elem = document.querySelector("#post-rating-show");
+
+              if (elem && elem.children.length === 0) {
+                raty(elem, {
+                  score: <%= @post.rating %>,
+                  readOnly: true,
+                  starOff: "<%= asset_path('star-off.png') %>",
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starHalf: "<%= asset_path('star-half.png') %>"
+                });
+              }
+            });
+          </script>
 
           <p class="mb-4">
             <%= @post.body %>

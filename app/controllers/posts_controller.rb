@@ -17,7 +17,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.build(post_params)
+    @post = current_user.posts.build(create_post_params)
 
     if @post.save
       redirect_to @post, notice: "投稿しました。"
@@ -30,7 +30,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @post.update(post_params)
+    if @post.update(update_post_params)
       redirect_to @post, notice: "投稿を更新しました。"
     else
       render :edit, status: :unprocessable_entity
@@ -54,7 +54,11 @@ class PostsController < ApplicationController
     end
   end
 
-  def post_params
+  def create_post_params
     params.require(:post).permit(:title, :body, :rating)
+  end
+
+  def update_post_params
+    params.require(:post).permit(:title, :body)
   end
 end
