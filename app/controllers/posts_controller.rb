@@ -4,7 +4,11 @@ class PostsController < ApplicationController
   before_action :ensure_owner, only: [:edit, :update, :destroy]
 
   def index
-    @posts = Post.all.order(created_at: :desc)
+    if params[:sort] == "rating"
+      @posts = Post.all.order(rating: :desc)
+    else
+      @posts = Post.all.order(created_at: :desc)
+    end
   end
 
   def show
