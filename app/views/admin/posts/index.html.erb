@@ -29,6 +29,10 @@
 
                     <td class="text-end">
                       <%= link_to "詳細",admin_post_path(post),class: "btn btn-outline-primary btn-sm" %>
+
+                      <%= link_to "削除",
+                          admin_post_path(post),data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
+                          class: "btn btn-outline-danger btn-sm" %>
                     </td>
                   </tr>
                 <% end %>
