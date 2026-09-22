@@ -22,8 +22,10 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(create_post_params)
+    tag_list = params[:post][:tag_name].split(',')
 
     if @post.save
+      @post.save_tags(tag_list)
       redirect_to @post, notice: "投稿しました。"
     else
       render :new, status: :unprocessable_entity

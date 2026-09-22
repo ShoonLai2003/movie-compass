@@ -30,6 +30,13 @@
                   rows: 5 %>
             </div>
 
+            <div class="mb-3">
+              <%= f.label :tag_name, "タグ", class: "form-label" %>
+              <%= f.text_field :tag_name,
+                  class: "form-control",
+                  placeholder: "例：アニメ, アクション, コメディ" %>
+            </div>
+
             <div class="mb-4">
               <%= f.label :rating, "評価", class: "form-label" %>
               <div id="post-rating"></div>

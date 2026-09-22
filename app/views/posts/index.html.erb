@@ -23,6 +23,13 @@
             <p class="card-text mb-2">
               投稿者：<%= post.user.name %>
             </p>
+            <div class="mb-2">
+              <% post.tags.each do |tag| %>
+                <%= link_to tag.name,
+                    search_path(range: "Tag", word: tag.name),
+                    class: "badge text-bg-secondary text-decoration-none me-1" %>
+              <% end %>
+            </div>
 
             <div class="card-text mb-2">
               <span>評価：</span>
