@@ -2,41 +2,88 @@
   <div class="row justify-content-center">
     <div class="col-12 col-lg-10">
 
-      <h2 class="mb-4">投稿一覧</h2>
+      <div class="rounded-3 p-4 mb-4"
+           style="background-color: #1b2638;">
 
-      <div class="card shadow-sm">
+        <div class="fw-bold mb-1"
+             style="color: #f4be55;">
+          MOVIE COMPASS
+        </div>
+
+        <h2 class="h3 fw-bold text-white mb-1">
+          投稿一覧
+        </h2>
+
+        <div style="color: #a0a7b2;">
+          POST MANAGEMENT
+        </div>
+      </div>
+
+      <div class="card shadow-sm border-0 rounded-3">
         <div class="card-body p-4">
 
+          <h3 class="h5 fw-bold mb-3">
+            登録投稿
+          </h3>
+
+          <hr class="mb-4"
+              style="border: 0; height: 3px;background-color: #f4be55;opacity: 1;">
+
           <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0">
+
+            <table class="table table-hover align-middle mb-0"
+                   style="min-width: 650px;">
+
               <thead>
                 <tr>
-                  <th>タイトル</th>
-                  <th>投稿者</th>
-                  <th>評価</th>
-                  <th>コメント数</th>
-                  <th></th>
+                  <th class="text-nowrap">タイトル</th>
+                  <th class="text-nowrap">投稿者</th>
+                  <th class="text-nowrap">評価</th>
+                  <th class="text-nowrap">コメント数</th>
+                  <th class="text-end text-nowrap">
+                    操作
+                  </th>
                 </tr>
               </thead>
 
               <tbody>
                 <% @posts.each do |post| %>
                   <tr>
-                    <td><%= post.title %></td>
-                    <td><%= post.user.name %></td>
-                    <td><%= post.rating %> / 5</td>
-                    <td><%= post.comments.count %></td>
+
+                    <td>
+                      <%= post.title %>
+                    </td>
+
+                    <td class="text-nowrap">
+                      <%= post.user.name %>
+                    </td>
+
+                    <td class="text-nowrap">
+                      <%= post.rating %> / 5
+                    </td>
+
+                    <td class="text-nowrap">
+                      <%= post.comments.count %>
+                    </td>
 
                     <td class="text-end">
-                      <%= link_to "詳細",admin_post_path(post),class: "btn btn-outline-primary btn-sm" %>
+                      <div class="d-flex justify-content-end
+                                  gap-2 flex-nowrap">
 
-                      <%= link_to "削除",
-                          admin_post_path(post),data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
-                          class: "btn btn-outline-danger btn-sm" %>
+                        <%= link_to "詳細",admin_post_path(post),
+                            class: "btn btn-sm text-white text-nowrap",style: "background-color: #1b2638;" %>
+
+                        <%= link_to "削除",admin_post_path(post),
+                            data: {turbo_method: :delete,turbo_confirm: "本当に削除しますか？"},
+                            class: "btn btn-outline-danger btn-sm text-nowrap" %>
+
+                      </div>
                     </td>
+
                   </tr>
                 <% end %>
               </tbody>
+
             </table>
           </div>
 

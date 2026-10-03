@@ -1,32 +1,91 @@
-<div class="about-container">
-  <h1>About Movie Compass</h1>
+<div class="about-page">
 
-  <%= image_tag "movie_compass_about.png",alt: "Movie Compassについて",class: "about-image" %>
+  <section class="about-hero">
+    <%= image_tag "movie_compass_about.png",alt: "Movie Compassについて",class: "about-hero-image" %>
 
-  <h2>Movie Compassとは?</h2>
+    <div class="about-hero-overlay"></div>
 
-  <p>
-    Movie Compassは、映画のレビューや評価を共有し、
-    次に観たい映画を見つけるためのレビューサイトです。
-  </p>
+    <div class="about-hero-content">
+      <p class="about-hero-label">DISCOVER THE WORLD OF MOVIES</p>
 
-  <p>
-    映画を観たいけれど「どの作品を選べばいいか分からない」
-    というときに、他のユーザーのレビューや評価を参考にして、
-    自分に合った映画を探すことができます。
-  </p>
+      <h1>About Movie Compass</h1>
 
-  <h2>Movie Compassでできること</h2>
+      <p class="about-hero-subtitle">
+        映画との新しい出会いを、ここから。
+      </p>
+    </div>
+  </section>
 
-  <ul>
-    <li>映画レビューの投稿</li>
-    <li>5段階での映画評価</li>
-    <li>他のユーザーのレビュー閲覧</li>
-    <li>キーワードやタグから映画を検索</li>
-    <li>レビューへのコメント</li>
-    <li>気になるレビューのブックマーク</li>
-  </ul>
+  <section class="about-intro">
+    <div class="about-section-heading">
+      <p class="about-section-label">OUR STORY</p>
+      <h2>Movie Compassとは？</h2>
+    </div>
 
-  <%= link_to "トップページへ戻る", root_path %>
+    <p>
+      Movie Compassは、映画のレビューや評価を共有し、
+      次に観たい映画を見つけるためのレビューサイトです。
+    </p>
+
+    <p>
+      映画を観たいけれど「どの作品を選べばいいか分からない」
+      というときに、他のユーザーのレビューや評価を参考にして、
+      自分に合った映画を探すことができます。
+    </p>
+  </section>
+
+  <section class="about-features">
+    <div class="about-section-heading">
+      <p class="about-section-label">FEATURES</p>
+      <h2>Movie Compassでできること</h2>
+    </div>
+
+    <div class="about-feature-grid">
+      <div class="about-feature-card">
+        <span class="about-feature-number">01</span>
+        <h3>レビューを投稿</h3>
+        <p>観た映画の感想を投稿し、他のユーザーと共有できます。</p>
+      </div>
+
+      <div class="about-feature-card">
+        <span class="about-feature-number">02</span>
+        <h3>5段階の映画評価</h3>
+        <p>星を使って、お気に入りの映画を評価できます。</p>
+      </div>
+
+      <div class="about-feature-card">
+        <span class="about-feature-number">03</span>
+        <h3>レビューを閲覧</h3>
+        <p>他のユーザーの感想や評価を参考にできます。</p>
+      </div>
+
+      <div class="about-feature-card">
+        <span class="about-feature-number">04</span>
+        <h3>映画を検索</h3>
+        <p>キーワードやタグを使って、興味のあるレビューを探せます。</p>
+      </div>
+
+      <div class="about-feature-card">
+        <span class="about-feature-number">05</span>
+        <h3>コメント</h3>
+        <p>レビューにコメントして、映画の感想を共有できます。</p>
+      </div>
+
+      <div class="about-feature-card">
+        <span class="about-feature-number">06</span>
+        <h3>ブックマーク</h3>
+        <p>気になるレビューを保存して、後から確認できます。</p>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="about-footer">
+    <h2>Find Your Next Favorite Movie</h2>
+
+    <p>あなたにぴったりの映画を見つけましょう。</p>
+
+    <%= link_to "トップページへ戻る",root_path,class: "btn about-back-button" %>
+  </section>
+
 </div>
-

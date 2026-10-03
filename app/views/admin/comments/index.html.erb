@@ -2,48 +2,90 @@
   <div class="row justify-content-center">
     <div class="col-12 col-lg-10">
 
-      <h2 class="mb-4">コメント一覧</h2>
+      <div class="rounded-3 p-4 mb-4"
+           style="background-color: #1c2738;">
 
-      <% if @comments.any? %>
-        <div class="card shadow-sm">
-          <div class="card-body p-4">
+        <div class="fw-bold mb-1"
+             style="color: #f4be55;">
+          MOVIE COMPASS
+        </div>
+
+        <h2 class="h3 fw-bold text-white mb-1">
+          コメント一覧
+        </h2>
+
+        <div style="color: #aab0bb;">
+          COMMENT MANAGEMENT
+        </div>
+      </div>
+
+      <div class="card shadow-sm border-0 rounded-3">
+        <div class="card-body p-4">
+
+          <h3 class="h5 fw-bold mb-3">
+            登録コメント
+          </h3>
+
+          <div class="mb-4"
+               style="height: 3px; background-color: #f4be55;">
+          </div>
+
+          <% if @comments.any? %>
 
             <div class="table-responsive">
-              <table class="table table-hover align-middle mb-0">
+              <table class="table table-hover align-middle mb-0"
+                     style="min-width: 650px;">
+
                 <thead>
                   <tr>
                     <th>投稿</th>
                     <th>コメント投稿者</th>
                     <th>コメント</th>
-                    <th></th>
+                    <th class="text-end">操作</th>
                   </tr>
                 </thead>
 
                 <tbody>
                   <% @comments.each do |comment| %>
                     <tr>
-                      <td><%= comment.post.title %></td>
-                      <td><%= comment.user.name %></td>
-                      <td><%= comment.comment %></td>
 
-                      <td class="text-end">
-                        <%= link_to "削除",admin_comment_path(comment),
-                            data: {turbo_method: :delete,turbo_confirm: "本当にこのコメントを削除しますか？"},
-                            class: "btn btn-outline-danger btn-sm" %>
+                      <td>
+                        <%= comment.post.title %>
                       </td>
+
+                      <td>
+                        <%= comment.user.name %>
+                      </td>
+
+                      <td class="text-break"
+                          style="min-width: 200px; max-width: 350px;">
+                        <%= comment.comment %>
+                      </td>
+
+                      <td class="text-end text-nowrap">
+                        <%= link_to "削除",admin_comment_path(comment),
+                            data: {turbo_method: :delete,turbo_confirm: "本当にこのコメントを削除しますか？"},class: "btn btn-outline-danger btn-sm" %>
+
+                      </td>
+
                     </tr>
                   <% end %>
                 </tbody>
+
               </table>
             </div>
 
-          </div>
+
+          <% else %>
+
+            <div class="alert alert-secondary mb-0">
+              コメントはありません。
+            </div>
+
+          <% end %>
+
         </div>
-      <% else %>
-        <div class="alert alert-secondary">
-          コメントはありません。
-        </div>
-      <% end %>
+      </div>
 
     </div>
   </div>

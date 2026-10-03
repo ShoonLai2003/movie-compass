@@ -1,61 +1,111 @@
-<div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-12 col-lg-9">
+<div class="movie-search-page">
+  <div class="container py-5">
+    <div class="movie-search-heading text-center">
+      <p class="movie-search-label">DISCOVER MOVIE REVIEWS</p>
+      <h1>検索結果</h1>
 
-      <h2 class="mb-4">検索結果</h2>
-
-      <% if @word.blank? %>
-        <div class="alert alert-warning">
-          キーワードを入力してください。
-        </div>
-
-      <% elsif @range == "User" %>
-        <h3 class="h4 mb-3">ユーザー検索結果</h3>
-
-        <% if @users.any? %>
-          <div class="row g-3">
-            <% @users.each do |user| %>
-              <div class="col-12 col-md-6">
-                <div class="card h-100 shadow-sm">
-                  <div class="card-body">
-                    <%= link_to user.name,
-                        user_path(user),
-                        class: "text-decoration-none fw-bold" %>
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        <% else %>
-          <div class="alert alert-secondary">
-            該当するユーザーが見つかりませんでした。
-          </div>
-        <% end %>
-
+      <% if @word.present? %>
+        <p>「<%= @word %>」の検索結果</p>
       <% else %>
-        <h3 class="h4 mb-3">投稿検索結果</h3>
+        <p>気になる映画やユーザーを探しましょう。</p>
+      <% end %>
+    </div>
 
-        <% if @posts.any? %>
-          <div class="row g-3">
-            <% @posts.each do |post| %>
-              <div class="col-12 col-md-6">
-                <div class="card h-100 shadow-sm">
-                  <div class="card-body">
-                    <%= link_to post.title,
-                        post_path(post),
-                        class: "text-decoration-none fw-bold" %>
-                  </div>
+    <% if @word.blank? %>
+      <div class="alert alert-warning">
+        キーワードを入力してください。
+      </div>
+
+    <% elsif @range == "User" %>
+      <h2 class="movie-search-section-title">ユーザー検索結果</h2>
+
+      <% if @users.any? %>
+        <div class="row g-4">
+          <% @users.each do |user| %>
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card movie-search-card h-100">
+                <div class="card-body p-4">
+                  <p class="movie-search-card-label">USER</p>
+                  <h3 class="h5 mb-3"><%= user.name %></h3>
+
+                  <%= link_to "プロフィールを見る →",user_path(user),class: "movie-search-detail" %>
                 </div>
               </div>
-            <% end %>
-          </div>
-        <% else %>
-          <div class="alert alert-secondary">
-            該当する投稿が見つかりませんでした。
-          </div>
-        <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="alert alert-secondary">
+          該当するユーザーが見つかりませんでした。
+        </div>
       <% end %>
 
+    <% else %>
+      <h2 class="movie-search-section-title">投稿検索結果</h2>
+
+      <% if @posts.any? %>
+        <div class="row g-4">
+          <% @posts.each do |post| %>
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card movie-search-card h-100">
+                <div class="card-body p-4 d-flex flex-column">
+
+                  <div class="mb-3">
+                    <% post.tags.each do |tag| %>
+                      <%= link_to tag.name,search_path(range: "Tag", word: tag.name),class: "movie-search-tag" %>
+                    <% end %>
+                  </div>
+
+                  <h3 class="h5 fw-bold mb-3">
+                    <%= post.title %>
+                  </h3>
+
+                  <p class="movie-search-author">
+                    投稿者：<%= post.user.name %>
+                  </p>
+
+                  <div class="mb-3">
+                    <p class="movie-search-card-label mb-2">映画評価</p>
+                    <div id="search-rating-<%= post.id %>"></div>
+                  </div>
+
+                  <script>
+                    document.addEventListener("turbo:load", function() {
+                      const elem = document.querySelector("#search-rating-<%= post.id %>");
+
+                      if (elem && elem.children.length === 0) {
+                        raty(elem, {score: <%= post.rating.to_i %>,readOnly: true,
+                          starOff: "<%= asset_path('star-off.png') %>",
+                          starOn: "<%= asset_path('star-on.png') %>",
+                          starHalf: "<%= asset_path('star-half.png') %>"
+                        });
+                      }
+                    });
+                  </script>
+
+                  <div class="movie-search-card-footer mt-auto">
+                    <p class="movie-search-comments">
+                      コメント <%= post.comments.count %>件
+                    </p>
+
+                    <%= link_to "レビューを見る →",post_path(post),class: "movie-search-detail" %>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="alert alert-secondary">
+          該当する投稿が見つかりませんでした。
+        </div>
+      <% end %>
+    <% end %>
+
+    <div class="text-center mt-5">
+      <%= link_to "← 投稿一覧へ戻る",posts_path,class: "movie-search-back" %>
     </div>
+
   </div>
 </div>

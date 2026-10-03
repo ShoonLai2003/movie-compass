@@ -1,67 +1,79 @@
-<div class="container py-5">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="mb-0">投稿一覧</h1>
+<div class="posts-page">
+  <div class="container py-5">
+    <div class="posts-page-header">
+      <div>
+        <p class="posts-page-label">EXPLORE MOVIE REVIEWS</p>
+        <h1>みんなの映画レビュー</h1>
+        <p class="posts-page-description">
+          レビューや評価から、次に観たい映画を見つけよう。
+        </p>
+      </div>
 
-    <%= link_to "新規投稿", new_post_path, class: "btn btn-primary" %>
-  </div>
+      <%= link_to "＋ 新規投稿",new_post_path,class: "btn posts-new-button" %>
+    </div>
 
-  <div class="mb-4">
-    <%= link_to "新しい順", posts_path %>
-    <span class="mx-2">|</span>
-    <%= link_to "評価の高い順", posts_path(sort: "rating") %>
-  </div>
-  
-  <div class="row g-4">
-    <% @posts.each do |post| %>
-      <div class="col-12 col-md-6 col-lg-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body">
-            <h2 class="h5 card-title">
-              <%= post.title %>
-            </h2>
+    <div class="posts-sort">
+      <span class="posts-sort-label">並び替え</span>
 
-            <p class="card-text mb-2">
-              投稿者：<%= post.user.name %>
-            </p>
-            <div class="mb-2">
-              <% post.tags.each do |tag| %>
-                <%= link_to tag.name,
-                    search_path(range: "Tag", word: tag.name),
-                    class: "badge text-bg-secondary text-decoration-none me-1" %>
-              <% end %>
+      <%= link_to "新しい順",posts_path,
+          class: "posts-sort-link #{params[:sort] == 'rating' ? '' : 'active'}" %>
+
+      <%= link_to "評価の高い順",posts_path(sort: "rating"),
+          class: "posts-sort-link #{params[:sort] == 'rating' ? 'active' : ''}" %>
+    </div>
+
+    <div class="row g-4">
+      <% @posts.each do |post| %>
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card posts-card h-100">
+            <div class="card-body d-flex flex-column">
+
+              <div class="posts-card-tags">
+                <% post.tags.each do |tag| %>
+                  <%= link_to tag.name,search_path(range: "Tag", word: tag.name),class: "posts-tag" %>
+                <% end %>
+              </div>
+
+              <h2 class="posts-card-title">
+                <%= post.title %>
+              </h2>
+
+              <p class="posts-card-author">
+                投稿者：<%= post.user.name %>
+              </p>
+
+              <div class="posts-card-rating">
+                <span class="posts-rating-label">映画評価</span>
+                <div id="post-rating-<%= post.id %>"></div>
+              </div>
+
+              <script>
+                document.addEventListener("turbo:load", function() {
+                  const elem = document.querySelector("#post-rating-<%= post.id %>");
+
+                  if (elem && elem.children.length === 0) {
+                    raty(elem, {score: <%= post.rating %>,readOnly: true,
+                      starOff: "<%= asset_path('star-off.png') %>",
+                      starOn: "<%= asset_path('star-on.png') %>",
+                      starHalf: "<%= asset_path('star-half.png') %>"
+                    });
+                  }
+                });
+              </script>
+
+              <div class="posts-card-footer mt-auto">
+                <p class="posts-card-comments">
+                  コメント <%= post.comments.count %>件
+                </p>
+
+                <%= link_to "レビューを見る →",post_path(post),class: "btn posts-detail-button" %>
+              </div>
+
             </div>
-
-            <div class="card-text mb-2">
-              <span>評価：</span>
-              <div id="post-rating-<%= post.id %>"></div>
-            </div>
-
-            <script>
-              document.addEventListener("turbo:load", function() {
-                const elem = document.querySelector("#post-rating-<%= post.id %>");
-
-                if (elem && elem.children.length === 0) {
-                  raty(elem, {
-                    score: <%= post.rating %>,
-                    readOnly: true,
-                    starOff: "<%= asset_path('star-off.png') %>",
-                    starOn: "<%= asset_path('star-on.png') %>",
-                    starHalf: "<%= asset_path('star-half.png') %>"
-                  });
-                }
-              });
-            </script>
-
-            <p class="card-text mb-3">
-              コメント数：<%= post.comments.count %>
-            </p>
-
-            <%= link_to "詳細を見る",
-                post_path(post),
-                class: "btn btn-outline-primary" %>
           </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
+
   </div>
 </div>

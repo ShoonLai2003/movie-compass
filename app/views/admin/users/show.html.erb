@@ -1,44 +1,76 @@
 <div class="container py-5">
   <div class="row justify-content-center">
     <div class="col-12 col-md-8 col-lg-6">
+      <div class="rounded-3 p-4 mb-4"
+           style="background-color: #1b2638;">
 
-      <div class="card shadow-sm">
+        <div class="fw-bold mb-1"
+             style="color: #f4be55;">
+          MOVIE COMPASS
+        </div>
+
+        <h2 class="h3 fw-bold text-white mb-1">
+          ユーザー詳細
+        </h2>
+
+        <div style="color: #a0a7b2;">
+          USER DETAILS
+        </div>
+      </div>
+
+      <div class="card shadow-sm border-0 rounded-3">
         <div class="card-body p-4">
-          <h2 class="mb-4">ユーザー詳細</h2>
+          <h3 class="h5 fw-bold mb-3">
+            登録情報
+          </h3>
 
-          <p>
-            <strong>名前：</strong>
-            <%= @user.name %>
-          </p>
+          <hr class="mb-4"
+              style="border: 0; height: 3px;background-color: #f4be55;opacity: 1;">
 
-          <p>
-            <strong>メールアドレス：</strong>
-            <%= @user.email %>
-          </p>
-
-          <p>
-            <strong>会員ステータス：</strong>
-
-            <% if @user.is_active %>
-              <span class="badge text-bg-success">有効</span>
-            <% else %>
-              <span class="badge text-bg-secondary">退会済み</span>
-            <% end %>
-          </p>
-
-          <div class="d-flex flex-wrap gap-2 mt-4">
-            <% if @user.is_active %>
-              <%= link_to "退会",
-                  admin_user_path(@user),
-                  data: {
-                    turbo_method: :patch,
-                    turbo_confirm: "本当に退会処理を行いますか？"
-                  },
-                  class: "btn btn-outline-danger" %>
-            <% end %>
-
-            <%= link_to "ユーザー一覧へ戻る",admin_users_path,class: "btn btn-outline-secondary" %>
+          <div class="mb-3">
+            <div class="fw-bold mb-2">名前</div>
+            <div><%= @user.name %></div>
           </div>
+
+          <hr>
+
+            <div class="mb-3">
+              <div class="fw-bold mb-2">
+                メールアドレス
+              </div>
+              <div class="text-break">
+                <%= @user.email %>
+              </div>
+            </div>
+
+          <hr>
+
+          <div class="mb-4">
+            <div class="fw-bold mb-2">
+              会員ステータス
+            </div>
+
+            <% if @user.is_active %>
+              <span class="badge text-bg-success">
+                有効
+              </span>
+            <% else %>
+              <span class="badge text-bg-secondary">
+                退会済み
+              </span>
+            <% end %>
+          </div>
+
+          <div class="d-grid gap-3">
+            <% if @user.is_active %>
+              <%= link_to "退会",admin_user_path(@user),
+                  data: {turbo_method: :patch,turbo_confirm: "本当に退会処理を行いますか？"},class: "btn btn-outline-danger" %>
+            <% end %>
+
+            <%= link_to "ユーザー一覧へ戻る",admin_users_path,class: "btn text-white",style: "background-color: #1b2638;" %>
+
+          </div>
+
         </div>
       </div>
 

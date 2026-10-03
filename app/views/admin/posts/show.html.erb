@@ -2,45 +2,93 @@
   <div class="row justify-content-center">
     <div class="col-12 col-md-10 col-lg-8">
 
-      <div class="card shadow-sm">
+      <div class="rounded-3 p-4 mb-4"
+           style="background-color: #1c2738;">
+
+        <div class="fw-bold mb-1"
+             style="color: #f4be55;">
+          MOVIE COMPASS
+        </div>
+
+        <h2 class="h3 fw-bold text-white mb-1">
+          投稿詳細
+        </h2>
+
+        <div style="color: #aab0bb;">
+          POST DETAILS
+        </div>
+      </div>
+
+      <div class="card shadow-sm border-0 rounded-3">
         <div class="card-body p-4">
-          <h2 class="mb-4">投稿詳細</h2>
+          <h3 class="h5 fw-bold mb-3">
+            投稿情報
+          </h3>
 
-          <p>
-            <strong>タイトル：</strong>
-            <%= @post.title %>
-          </p>
+          <div class="mb-4"
+               style="height: 3px; background-color: #f4be55;">
+          </div>
+          <div class="mb-3">
+            <div class="fw-bold mb-2">
+              タイトル
+            </div>
 
-          <p>
-            <strong>投稿者：</strong>
-            <%= @post.user.name %>
-          </p>
-
-          <p>
-            <strong>評価：</strong>
-            <%= @post.rating %> / 5
-          </p>
-
-          <p>
-            <strong>本文：</strong>
-          </p>
-
-          <div class="border rounded p-3 mb-3 bg-light">
-            <%= @post.body %>
+            <div class="text-break">
+              <%= @post.title %>
+            </div>
           </div>
 
-          <p>
-            <strong>コメント数：</strong>
-            <%= @post.comments.count %>
-          </p>
+          <hr>
+            <div class="mb-3">
+              <div class="fw-bold mb-2">
+                投稿者
+              </div>
 
-          <div class="d-flex flex-wrap gap-2 mt-4">
+              <div class="text-break">
+                <%= @post.user.name %>
+              </div>
+            </div>
+
+          <hr>
+            <div class="mb-3">
+              <div class="fw-bold mb-2">
+                評価
+              </div>
+
+              <div>
+                <%= @post.rating %> / 5
+              </div>
+            </div>
+
+            <hr>
+              <div class="mb-3">
+                <div class="fw-bold mb-2">
+                  本文
+                </div>
+
+                <div class="border rounded p-3 bg-light text-break"
+                    style="white-space: pre-wrap;"><%= @post.body %></div>
+              </div>
+           <hr>
+
+          <div class="mb-4">
+            <div class="fw-bold mb-2">
+              コメント数
+            </div>
+
+            <div>
+              <%= @post.comments.count %>
+            </div>
+          </div>
+
+          <div class="d-grid gap-2">
             <%= link_to "投稿を削除",admin_post_path(@post),
                 data: {turbo_method: :delete,turbo_confirm: "本当にこの投稿を削除しますか？"},
-                class: "btn btn-outline-danger" %>
+                class: "btn btn-outline-danger fw-bold" %>
 
-            <%= link_to "投稿一覧へ戻る",admin_posts_path,class: "btn btn-outline-secondary" %>
+            <%= link_to "投稿一覧へ戻る",admin_posts_path,class: "btn text-white fw-bold",style: "background-color: #1c2738;" %>
           </div>
+
         </div>
       </div>
 

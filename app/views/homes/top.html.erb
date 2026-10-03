@@ -1,22 +1,26 @@
-<div class="top-container">
-  <%= image_tag "movie_compass_top.jpg",alt: "Movie Compass メインビジュアル",class: "top-image" %>
+<div class="movie-hero">
+  <div class="movie-hero-content">
+    <p class="movie-hero-label">FIND YOUR NEXT FAVORITE MOVIE</p>
 
-  <h1>Movie Compass</h1>
+    <h1>Movie Compass</h1>
 
-  <p>
-    あなたにぴったりの映画を見つけよう
-  </p>
+    <h2>あなたにぴったりの映画を見つけよう</h2>
 
-  <p>
-    映画のレビューや評価を共有して、
-    次に観たい映画を見つけるためのレビューサイトです。
-  </p>
+    <p class="movie-hero-description">
+      映画のレビューや評価を共有して、<br>
+      次に観たい映画を見つけるためのレビューサイトです。
+    </p>
 
-  <%= link_to "Movie Compassについて", about_path %>
+    <div class="movie-hero-buttons">
+      <% if user_signed_in? %>
+        <%= link_to "投稿一覧を見る", posts_path,class: "btn btn-warning btn-lg" %>
+      <% else %>
+        <%= link_to "新規登録", new_user_registration_path,class: "btn btn-warning btn-lg" %>
 
-  <% unless user_signed_in? %>
-    <%= link_to "新規登録", new_user_registration_path %>
-    <%= link_to "ログイン", new_user_session_path %>
-  <% end %>
+        <%= link_to "ログイン", new_user_session_path,class: "btn btn-outline-light btn-lg" %>
+      <% end %>
+    </div>
 
+    <%= link_to "Movie Compassについて", about_path,class: "movie-hero-about" %>
+  </div>
 </div>

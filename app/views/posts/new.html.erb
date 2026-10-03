@@ -1,72 +1,79 @@
-<div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-12 col-md-8 col-lg-6">
-      <div class="card shadow-sm">
-        <div class="card-body p-4">
-          <h1 class="h3 text-center mb-4">新規投稿</h1>
+<div class="movie-post-page">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
 
-          <% if @post.errors.any? %>
-            <div class="alert alert-danger">
-              <h2 class="h6"><%= @post.errors.count %>件のエラーがあります</h2>
+        <div class="movie-post-heading text-center">
+          <p class="movie-post-label">SHARE YOUR MOVIE EXPERIENCE</p>
+          <h1>新規投稿</h1>
+          <p>あなたの映画体験を、みんなと共有しよう。</p>
+        </div>
 
-              <ul class="mb-0">
-                <% @post.errors.full_messages.each do |message| %>
-                  <li><%= message %></li>
-                <% end %>
-              </ul>
+        <div class="card movie-post-card">
+          <div class="card-body p-4 p-md-5">
+
+            <% if @post.errors.any? %>
+              <div class="alert alert-danger">
+                <h2 class="h6"><%= @post.errors.count %>件のエラーがあります</h2>
+
+                <ul class="mb-0">
+                  <% @post.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <%= form_with model: @post do |f| %>
+              <div class="mb-4">
+                <%= f.label :title, "タイトル", class: "form-label" %>
+                <%= f.text_field :title,class: "form-control",placeholder: "映画のタイトルを入力" %>
+              </div>
+
+              <div class="mb-4">
+                <%= f.label :body, "レビュー", class: "form-label" %>
+                <%= f.text_area :body,class: "form-control",rows: 5,placeholder: "映画の感想を書いてください" %>
+              </div>
+
+              <div class="mb-4">
+                <%= f.label :tag_name, "タグ", class: "form-label" %>
+                <%= f.text_field :tag_name,
+                    class: "form-control",placeholder: "例：アニメ, アクション, コメディ" %>
+                <div class="form-text">
+                  複数のタグはカンマ（,）で区切ってください。
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <%= f.label :rating, "評価", class: "form-label" %>
+                <div id="post-rating"></div>
+              </div>
+
+              <script>
+                document.addEventListener("turbo:load", function() {
+                  const elem = document.querySelector("#post-rating");
+
+                  if (elem && elem.children.length === 0) {
+                    raty(elem, {
+                      scoreName: "post[rating]",starOff: "<%= asset_path('star-off.png') %>",starOn: "<%= asset_path('star-on.png') %>",
+                      starHalf: "<%= asset_path('star-half.png') %>"
+                    });
+                  }
+                });
+              </script>
+
+              <div class="d-grid">
+                <%= f.submit "投稿する", class: "btn movie-post-submit" %>
+              </div>
+            <% end %>
+
+            <div class="text-center mt-4">
+              <%= link_to "← 投稿一覧へ戻る",posts_path,class: "movie-post-back" %>
             </div>
-          <% end %>
 
-          <%= form_with model: @post do |f| %>
-            <div class="mb-3">
-              <%= f.label :title, "タイトル", class: "form-label" %>
-              <%= f.text_field :title, class: "form-control" %>
-            </div>
-
-            <div class="mb-3">
-              <%= f.label :body, "レビュー", class: "form-label" %>
-              <%= f.text_area :body,
-                  class: "form-control",
-                  rows: 5 %>
-            </div>
-
-            <div class="mb-3">
-              <%= f.label :tag_name, "タグ", class: "form-label" %>
-              <%= f.text_field :tag_name,
-                  class: "form-control",
-                  placeholder: "例：アニメ, アクション, コメディ" %>
-            </div>
-
-            <div class="mb-4">
-              <%= f.label :rating, "評価", class: "form-label" %>
-              <div id="post-rating"></div>
-            </div>
-
-            <script>
-              document.addEventListener("turbo:load", function() {
-                const elem = document.querySelector("#post-rating");
-
-                if (elem && elem.children.length === 0) {
-                  raty(elem, {scoreName: "post[rating]",
-                    starOff: "<%= asset_path('star-off.png') %>",
-                    starOn: "<%= asset_path('star-on.png') %>",
-                    starHalf: "<%= asset_path('star-half.png') %>"
-                  });
-                }
-              });
-            </script>
-
-            <div class="d-grid">
-              <%= f.submit "投稿する", class: "btn btn-primary" %>
-            </div>
-          <% end %>
-
-          <div class="text-center mt-3">
-            <%= link_to "投稿一覧へ戻る",
-                posts_path,
-                class: "btn btn-link" %>
           </div>
         </div>
+
       </div>
     </div>
   </div>
