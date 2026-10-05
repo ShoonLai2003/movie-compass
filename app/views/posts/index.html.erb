@@ -62,9 +62,13 @@
               </script>
 
               <div class="posts-card-footer mt-auto">
-                <p class="posts-card-comments">
-                  コメント <%= post.comments.count %>件
-                </p>
+                <div>
+                  <p class="posts-card-comments">
+                    コメント <%= post.comments.count %>件
+                  </p>
+
+                  <%= render "favorites/btn", post: post %>
+                </div>
 
                 <%= link_to "レビューを見る →",post_path(post),class: "btn posts-detail-button" %>
               </div>

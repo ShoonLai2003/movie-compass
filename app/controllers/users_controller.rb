@@ -6,6 +6,10 @@ class UsersController < ApplicationController
     @posts = current_user.posts.order(created_at: :desc)
   end
 
+  def favorites
+    @favorites = current_user.favorites
+  end
+
   def show
     @user = User.find(params[:id])
     @posts = @user.posts.order(created_at: :desc)

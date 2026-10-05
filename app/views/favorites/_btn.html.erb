@@ -1,0 +1,11 @@
+<% if post.favorited_by?(current_user) %>
+  <%= link_to post_favorites_path(post),data: { turbo_method: :delete },
+      style: "color: red; text-decoration: none;" do %>
+    ♥ <%= post.favorites.count %>
+  <% end %>
+<% else %>
+  <%= link_to post_favorites_path(post),data: { turbo_method: :post },
+      style: "color: #6c757d; text-decoration: none;" do %>
+    ♡ <%= post.favorites.count %>
+  <% end %>
+<% end %>

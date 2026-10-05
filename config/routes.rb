@@ -13,9 +13,10 @@ Rails.application.routes.draw do
   get "/about", to: "homes#about"
   resources :posts do
     resources :comments
-    resource :bookmark
+    resource :favorites, only: [:create, :destroy]
   end
   get "/mypage" , to: "users#mypage" , as: :mypage
+  get "/favorites", to: "users#favorites", as: :favorites
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   get "/users/:id", to: "users#show", as: :user

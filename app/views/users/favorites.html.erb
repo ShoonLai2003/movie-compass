@@ -1,0 +1,90 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-9">
+
+      <div class="rounded-3 p-4 mb-4" style="background-color: #172233;">
+        <p class="mb-1 fw-bold" style="color: #f4be55;">
+          MOVIE COMPASS
+        </p>
+
+        <h1 class="text-white fw-bold mb-1">
+          いいね一覧
+        </h1>
+
+        <p class="text-white-50 mb-0">
+          FAVORITE MOVIES
+        </p>
+      </div>
+
+      <div class="card shadow-sm border-0 rounded-3">
+        <div class="card-body p-4">
+
+          <h2 class="h4 fw-bold mb-3" style="color: #172233;">
+            いいねした投稿
+          </h2>
+
+          <hr style="border: 2px solid #f4be55; opacity: 1;">
+
+          <% if @favorites.any? %>
+            <div class="row g-3">
+
+              <% @favorites.each do |favorite| %>
+                <% post = favorite.post %>
+
+                <div class="col-12 col-md-6">
+                  <div class="card h-100 rounded-3">
+                    <div class="card-body p-4 d-flex flex-column">
+
+                      <h3 class="h5 fw-bold mb-2" style="color: #172233;">
+                        <%= post.title %>
+                      </h3>
+
+                      <p class="text-muted small mb-3">
+                        投稿者：<%= post.user.name %>
+                      </p>
+
+                      <div class="mb-3">
+                        <div id="favorite-post-rating-<%= post.id %>"></div>
+
+                        <p class="text-muted small mb-0">
+                          評価：<%= post.rating %> / 5
+                        </p>
+                      </div>
+
+                      <script>
+                        document.addEventListener("turbo:load", function() {
+                          const elem = document.querySelector("#favorite-post-rating-<%= post.id %>");
+
+                          if (elem && elem.children.length === 0) {
+                            raty(elem, {
+                              score: <%= post.rating %>,
+                              readOnly: true,
+                              starOff: "<%= asset_path('star-off.png') %>",
+                              starOn: "<%= asset_path('star-on.png') %>",
+                              starHalf: "<%= asset_path('star-half.png') %>"
+                            });
+                          }
+                        });
+                      </script>
+
+                      <%= link_to "詳細を見る",post_path(post),class: "btn text-white mt-auto",style: "background-color: #172233;" %>
+
+                    </div>
+                  </div>
+                </div>
+
+              <% end %>
+
+            </div>
+          <% else %>
+            <p class="text-muted mb-0">
+              まだいいねした投稿はありません。
+            </p>
+          <% end %>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
