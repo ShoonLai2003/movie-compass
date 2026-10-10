@@ -1,0 +1,47 @@
+<div class="movie-search-page">
+  <div class="container py-5">
+
+    <div class="movie-search-heading text-center">
+      <p class="movie-search-label">DISCOVER MOVIE TAGS</p>
+      <h1>タグ一覧</h1>
+      <p>気になるタグを選んで、映画レビューを探しましょう。</p>
+    </div>
+
+    <% if @tags.any? %>
+      <div class="row g-4">
+        <% @tags.each do |tag| %>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card movie-search-card h-100">
+              <div class="card-body p-4">
+                <p class="movie-search-card-label">TAG</p>
+
+                <h2 class="h5 mb-3">
+                  <%= tag.name %>
+                </h2>
+
+                <p>
+                  投稿数：<%= tag.posts.count %>件
+                </p>
+
+                <%= link_to "このタグの投稿を見る →",
+                    search_path(range: "Tag", word: tag.name),
+                    class: "movie-search-detail" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="alert alert-secondary">
+        まだタグが登録されていません。
+      </div>
+    <% end %>
+
+    <div class="text-center mt-5">
+      <%= link_to "← 投稿一覧へ戻る",
+          posts_path,
+          class: "movie-search-back" %>
+    </div>
+
+  </div>
+</div>
